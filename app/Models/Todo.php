@@ -4,16 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-
 class Todo extends Model
 {
-    protected $fillable = [
-        'title',
-        'detail',
-        'status',
-        'author',
-        'date',
-    
-    ];
-    
+    protected $fillable = ['title', 'detail','status', 'author', 'date',];
+
 }

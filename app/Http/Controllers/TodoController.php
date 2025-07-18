@@ -13,12 +13,12 @@ class TodoController extends Controller
     return view('Homepage');
  }
  public function todos(){
-   $todos = Todo::latest()->get();
+   $todos = Todo::orderBy('status', 'ASC')->latest()->paginate(3);
    
     return view('AllTodos', compact('todos'));
  }
 
- function storeTodo(Request $request) {
+ function storeTodo(Request $request) { 
     //*validation
     $request->validate([
       'title' => 'required|min:3|max:10',
@@ -35,4 +35,24 @@ class TodoController extends Controller
         'res'  => 'Todo added successfully',
     ]);
  }
+
+
+   function deleteTodo($id){
+      try{
+          Todo::findOrfail($id)->delete();
+          return to_route('Todos')->with('msg', [
+            'type' => 'success',
+            'res'  => 'Todo deleted successfully',
+          ]);
+      } catch (\Exception $e) {
+         return to_route('Todos')->with('msg', [
+            'type' => 'error',
+            'res'  => 'Something went wrong',
+
+         ]);
+
+
+      }
+      
+   }
 }

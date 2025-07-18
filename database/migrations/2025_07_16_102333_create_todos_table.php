@@ -16,11 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->string('detail')->nullable();
             $table->string('author')->nullable();
-            $table->string('date');
-            $table->boolean('status')->default(false)->comment("True or 1 ==succefull; False or 0 == unsuccefull");
-
+            $table->date('date');
+            $table->boolean('status')->default(false)->comment( "True or 1 == Complete; False or 0 == Not Complete");
             $table->timestamps();
-
         });
     }
 
